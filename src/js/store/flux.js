@@ -15,30 +15,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			getContacts: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/AgendaEdu/contacts")
+					.then(response => response.json)
+					.then(data => console.log(data))
+					.catch(error => console.log(error))
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			},
+			createAgenda: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/AgendaEdu",
+					{
+						method: "POST",
+						header: { "Content-Type": "application/json" },
+						
+					})
+					.then(response => response.json)
+					.then(data => console.log(data))
+					.catch(error => console.log(error))
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			},
+			createContacto: () => {
+			fetch("https://playground.4geeks.com/contact/agendas/AgendaEdu/contacts",
+			{
+				method: "POST",
+				header: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					"name": "Edu",
+					"phone": "7348438344",
+					"email": "feff@effd.cm",
+					"address": "calee dduffhefhe"
+				  })
+			})
+			.then(response => response.json)
+			.then(data => console.log(data))
+			.catch(error => console.log(error))
+			
 		}
+	}
 	};
 };
 

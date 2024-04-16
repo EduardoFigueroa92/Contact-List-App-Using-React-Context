@@ -1,23 +1,18 @@
-import React from "react";
+import React,{useContext} from "react"; 
+import {Context} from "../store/appContext";
 
-import Card from "./Card";
-import Button from "./Button";
 import Formulario from "./Formulario";
 import Alert from "./Alert";
 
-
 const Home = () => {
+    const {store,actions }= useContext(Context)
     return (
         <div className="container">
-            <Button />
+            <Navbar />
             <div className="row" >
-                <Card
-                    img={"https://w7.pngwing.com/pngs/935/68/png-transparent-cartoon-self-portrait-drawing-portrait-painting-animation-comics-face-comic-book.png"}
-                    nombre={ }
-                    direccion={ }
-                    telefono={ }
-                    email={ }
-                />
+                <button onClick={() => actions.createAgenda()}>Crear agenda</button>
+                <button onClick={() => actions.createContacto()}>Crear contacto</button>
+                <button onClick={() => actions.getContacts()}>Traer contacto</button>
                 <Formulario />
                 <Alert />
 
